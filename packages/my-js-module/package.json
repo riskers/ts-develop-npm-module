@@ -1,0 +1,33 @@
+{
+  "name": "my-js-module",
+  "version": "1.0.0",
+  "description": "",
+  "source": "index.ts",
+  "main": "dist/my-js-module.cjs",
+  "types": "types/index.d.ts",
+  "type": "module",
+  "module": "./dist/my-js-module.esm.js",
+  "exports": {
+    ".": {
+      "import": "./dist/my-js-module.esm.js",
+      "require": "./dist/my-js-module.cjs"
+    },
+    "./dist/*": "./dist/*",
+    "./types/*": "./types/*"
+  },
+  "scripts": {
+    "build": "npm run build:node & npm run build:browser",
+    "build:node": "rm -rf dist && microbundle -f cjs -o dist --compress=false --target=node --sourcemap=false --external all",
+    "build:browser": "rm -rf dist && microbundle -f umd,esm,modern -o dist --compress=false --target=web --name=JSMODULE --sourcemap=false --external all"
+  },
+  "keywords": [],
+  "author": "riskers",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/lodash": "^4.14.182",
+    "microbundle": "^0.15.0"
+  },
+  "dependencies": {
+    "lodash": "^4.17.21"
+  }
+}
